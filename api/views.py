@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 
-from api.models import Car
+from api.models import Car, Book
 from .serializers import CarSerializer
 # Create your views here.
 
@@ -45,25 +46,86 @@ def getRoutes(request):
     
     return Response(routes)
 
-@api_view(['GET'])
-def getCars(request):
-    cars = Car.objects.all()
-    serializer = CarSerializer(cars, many=True)
-    return Response(serializer.data)
+@api_view(['GET', 'POST'])
+def cars_collection(request):
+    if request.method == 'GET':
+        cars = Car.objects.all()
+        serializer = CarSerializer(cars, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = request.data
+        car = Car.objects.create(
+            name=data['name'],
+            manufacturer=data['manufacturer'],
+            car_class=data['car_class'],
+            available=data['available']
+        )
+        serializer = CarSerializer(car, many=False)
+        return Response(serializer.data)
+    else:
+        return Response('Method not allowed', status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-@api_view(['GET'])
-def getCar(request, pk):
-    car = Car.objects.get(id=pk)
-    serializer = CarSerializer(car, many=False)
-    return Response(serializer.data)
+@api_view(['GET', 'PUT', 'DELETE'])
+def crudCars(request, pk):
+    if request.method == 'GET':
+        car = Car.objects.get(id=pk)
+        serializer = CarSerializer(car, many=False)
+        return Response(serializer.data)
 
-@api_view(['PUT'])
-def updateCar(request, pk):
-    data = request.data
-    car = Car.objects.get(id=pk)
-    serializer = CarSerializer(instance=car, data=data)
+    elif request.method == 'PUT':
+        data = request.data
+        car = Car.objects.get(id=pk)
+        serializer = CarSerializer(instance=car, data=data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
-    if serializer.is_valid():
-        serializer.save()
+    elif request.method == 'DELETE':
+        car = Car.objects.get(id=pk)
+        car.delete()
+        return Response('Car was deteled!')
 
-    return Response(serializer.data)
+    else:
+        return Response('Method not allowed!')
+
+@api_view(['GET', 'POST'])
+def books_collection(request):
+    if request.method == 'GET':
+        book = Book.objects.all()
+        serializer = CarSerializer(cars, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        data = request.data
+        car = Car.objects.create(
+            name=data['name'],
+            manufacturer=data['manufacturer'],
+            car_class=data['car_class'],
+            available=data['available']
+        )
+        serializer = CarSerializer(car, many=False)
+        return Response(serializer.data)
+    else:
+        return Response('Method not allowed', status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def crudCars(request, pk):
+    if request.method == 'GET':
+        car = Car.objects.get(id=pk)
+        serializer = CarSerializer(car, many=False)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        data = request.data
+        car = Car.objects.get(id=pk)
+        serializer = CarSerializer(instance=car, data=data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        car = Car.objects.get(id=pk)
+        car.delete()
+        return Response('Car was deteled!')
+
+    else:
+        return Response('Method not allowed!')

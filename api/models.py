@@ -10,3 +10,12 @@ class Car(models.Model):
 
     def __str__(self):
         return self.name
+
+class Book(models.Model):
+    name = models.TextField(null=True, blank=True)
+    author = models.TextField(null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+    added_on = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.name + ' by ' + self.author
