@@ -6,7 +6,6 @@ const CarPage = ({ match }) => {
   let carId = useParams().id //= match.params.id;
   let [car, setCar] = useState(null);
   useEffect(() => {
-    console.log(carId)
     getCar()
   // eslint-disable-next-line
   }, [carId]);
