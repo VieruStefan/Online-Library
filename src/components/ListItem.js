@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ListItem = ({car}) => {
   return (
-    <div>
+    <Link to={`/cars/${car.id}`}>
         <h3>{car.name}</h3>
-    </div>
+    </Link>
   )
 }
 
