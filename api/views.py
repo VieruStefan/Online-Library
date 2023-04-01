@@ -56,3 +56,14 @@ def getCar(request, pk):
     car = Car.objects.get(id=pk)
     serializer = CarSerializer(car, many=False)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateCar(request, pk):
+    data = request.data
+    car = Car.objects.get(id=pk)
+    serializer = CarSerializer(instance=car, data=data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
