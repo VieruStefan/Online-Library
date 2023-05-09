@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
-const ListItem = ({car}) => {
+import { Nav } from 'react-bootstrap'
+const ListItem = ({book}) => {
   return (
-    <Link to={`/cars/${car.id}`}>
-        <h3>{car.name}</h3>
-    </Link>
+    <div>
+      <Nav.Link href={`/books/${book.id}`}><h3>{book.title}</h3></Nav.Link>
+      {/* <Link to={`/books/${book.id}`}>
+          <h3>{book.title}</h3>
+      </Link> */}
+
+    </div>
   )
 }
 

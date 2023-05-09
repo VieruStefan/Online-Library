@@ -3,7 +3,9 @@ import React from "react";
 function Home() {
   return (
     <div>
-        Home
+        <h1 id='title'>
+          Welcome to Online Library!
+        </h1>
     </div>
   );
 }
