@@ -21,11 +21,7 @@ const BookListPage = () => {
         index % 4 === 0 ? (
           <div className="card-group" key={index}>
             <div
-              className={
-                currentTheme === "dark"
-                  ? "card text-white bg-dark mb-3"
-                  : "card bg-light mb-3"
-              }
+              className="card mb-3"
               style={{ width: 27 + "rem" }}
               key={index}
             >

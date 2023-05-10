@@ -1,24 +1,41 @@
 :root {
-    --primary-color: #007bff;
-    --text-color: #212529;
-    --bg-color: #f8f9fa;
-  }
-  .my-navbar {
-    background-color: red;
-  }
+    --text-color: #424242;
+    --bg-color: #ffffff;
+    --nav-bg-color: #ffffff;
+    --book-1: #fd2121;
+    --book-2: #2d5eff;
+}
   
-  [data-theme="dark"] {
-    --primary-color: #adb5bd;
-    --text-color: #f8f9fa;
-    --bg-color: #343a40;
-  }
 html{
     background-color: var(--bg-color);
     color: var(--text-color);
 }
 html body{
-        background-color: var(--bg-color);
-        color: var(--text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand {
+  color: var(--text-color);
+}
+.navbar-dark {
+  background-color: var(--nav-bg-color);
+  color: var(--text-color);
+}
+.navbar-light {
+  background-color: var(--nav-bg-color);
+  color: var(--text-color);
+}
+.navbar-light .navbar-nav .nav-link,
+.navbar-light .navbar-brand {
+  color: var(--text-color);
+}
+.card-body{
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+.card-title{
+  color: var(--text-color);
 }
 .app-container {
     display: flex;
@@ -52,6 +69,3 @@ html body{
     color:white;
     
 }
-/* #button_text:hover{
-    color:dimgray
-} */
